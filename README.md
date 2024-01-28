@@ -5,11 +5,14 @@ Langkah-langkah untuk menjalankan program ini pada komputer anda:
 ```git clone https://github.com/winafinka/nodejs-docker-example.git```
 ```cd nodejs-docker-example``` // untuk berpindah ke dalam folder repository git
 ```code .``` // untuk membuka vscode
-### 2. Build Docker Image
+### 2. Install node
+```npm install```
+### 3. Build Docker Image
+Buka docker desktop terlebih dahulu, kemudian jalankan:
 ```docker build -t nodejs-docker-example .```
-### 3. Jalankan Docker Container
+### 4. Jalankan Docker Container
 ```docker run -p 3000:3000 nodejs-docker-example```
-### 4. Akses lokalhost
+### 5. Akses lokalhost
 ```http://localhost:3000```
 <br> Maka akan tampil seperti dibawah ini:
 <img width="1332" alt="image" src="https://github.com/finkastwn/nodejs-docker-example/assets/60337608/454ef4be-4377-4ba2-861d-37039a806e87">
