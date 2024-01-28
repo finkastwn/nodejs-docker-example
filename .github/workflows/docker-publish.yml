@@ -19,3 +19,5 @@ jobs:
           context: .
           push: true
           tags: winafinka/nodejs-docker-example:latest
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
