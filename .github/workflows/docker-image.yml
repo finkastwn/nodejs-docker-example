@@ -11,19 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Build the Docker image
-        id: build-image
-        run: |
-          IMAGE_ID=$(docker build . --file Dockerfile --quiet)
-          echo "::set-output name=image_id::$IMAGE_ID"
-          echo "Image ID: $IMAGE_ID"
-        shell: bash
+        run: docker build . --file Dockerfile --tag my-github-action-image
 
   publish:
     runs-on: ubuntu-latest
@@ -40,10 +34,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Debug Output
+      - name: Push Docker image to Docker Hub
         run: |
-          echo "Image ID from Build Step: ${{ needs.build.outputs.image_id }}"
-      - name: Tag and Push Docker image to Docker Hub
-        run: |
-          docker tag ${{ needs.build.outputs.image_id }} winafinka/nodejs-docker-example:latest
+          docker tag my-github-action-image winafinka/nodejs-docker-example:latest
           docker push winafinka/nodejs-docker-example:latest
