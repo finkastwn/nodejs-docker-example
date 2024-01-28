@@ -1,0 +1,17 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: node
+  script:
+    - echo "Build Docker"
+    - echo "Build success!"
+
+test:
+  stage: deploy
+  image: node
+  script:
+    - echo "Deploy Docker"
+    - echo "Deploy success!"
