@@ -17,7 +17,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+        run: docker build . --file Dockerfile --tag latest
 
   publish:
     runs-on: ubuntu-latest
@@ -36,5 +36,5 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push Docker image to Docker Hub
         run: |
-          docker tag my-image-name:$(date +%s) winafinka/nodejs-docker-example:latest
+          docker tag latest winafinka/nodejs-docker-example:latest
           docker push winafinka/nodejs-docker-example:latest
