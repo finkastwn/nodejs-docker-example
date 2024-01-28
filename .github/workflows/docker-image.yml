@@ -22,6 +22,7 @@ jobs:
         run: |
           IMAGE_ID=$(docker build . --file Dockerfile --quiet)
           echo "::set-output name=image_id::$IMAGE_ID"
+          echo "Image ID: $IMAGE_ID"
         shell: bash
 
   publish:
@@ -39,6 +40,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Debug Output
+        run: |
+          echo "Image ID from Build Step: ${{ needs.build.outputs.image_id }}"
       - name: Tag and Push Docker image to Docker Hub
         run: |
           docker tag ${{ needs.build.outputs.image_id }} winafinka/nodejs-docker-example:latest
